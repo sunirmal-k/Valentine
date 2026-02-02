@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Will you be my Valentine?</title>
+  <style>
+    body{
+      font-family: system-ui, Arial, sans-serif;
+      background:#f7f7f7;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      margin:0;
+    }
+    .card{
+      background:white;
+      padding:28px;
+      border-radius:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+      text-align:center;
+      width:min(520px, 92vw);
+    }
+    h1{
+      margin:0 0 16px;
+      color:#2f3a8f;
+      font-size:28px;
+      font-weight:800;
+    }
+    .btnRow{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      align-items:center;
+      margin:12px 0 18px;
+      flex-wrap:wrap;
+    }
+    button{
+      border:none;
+      cursor:pointer;
+      padding:10px 18px;
+      border-radius:8px;
+      font-size:16px;
+      color:white;
+    }
+    #yesBtn{ background:#25a35a; transform-origin:center; }
+    #noBtn{ background:#2b4dbb; }
+    .imgWrap{
+      display:flex;
+      justify-content:center;
+      margin-top:8px;
+    }
+    .imgWrap img{
+      width:220px;
+      max-width:60vw;
+      height:auto;
+    }
+    .hidden{ display:none; }
+  </style>
+</head>
+
+<body>
+  <div class="card" id="page1">
+    <h1>Will you be my Valentine?</h1>
+
+    <div class="btnRow">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
+
+    <!-- Replace this image URL with your own if you want -->
+    <div class="imgWrap">
+      <img src="baby1.png" alt="cute cat" />
+    </div>
+  </div>
+
+  <div class="card hidden" id="page2">
+    <h1>Yay!! 💖🥰</h1>
+    <p>See you on Valentine’s 😄</p>
+    <div class="imgWrap">
+      <img src="baby2.png" alt="happy" />
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn  = document.getElementById("noBtn");
+    const page1  = document.getElementById("page1");
+    const page2  = document.getElementById("page2");
+
+    const noTexts = [
+      "No",
+      "Really sure??",
+      "Think again 😭",
+      "I will be very sad…",
+      "Last chance 🥺",
+      "Pleaseee 🥹",
+      "Don’t do this 😭",
+      "Okay… but I’ll cry 😢"
+    ];
+
+    let noCount = 0;
+    let yesScale = 1;
+
+    noBtn.addEventListener("click", () => {
+      noCount++;
+      yesScale += 0.35;                     // makes Yes bigger each time
+      yesBtn.style.transform = `scale(${yesScale})`;
+
+      const idx = Math.min(noCount, noTexts.length - 1);
+      noBtn.textContent = noTexts[idx];
+
+      // Optional: make the No button smaller over time
+      const noScale = Math.max(1 - noCount * 0.07, 0.6);
+      noBtn.style.transform = `scale(${noScale})`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      page1.classList.add("hidden");
+      page2.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
