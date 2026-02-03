@@ -43,6 +43,7 @@
       border-radius:8px;
       font-size:16px;
       color:white;
+      transition: all 0.25s ease;
     }
     #yesBtn{ background:#25a35a; transform-origin:center; }
     #noBtn{ background:#2b4dbb; }
@@ -62,7 +63,7 @@
 
 <body>
   <div class="card" id="page1">
-    <h1>Will you be my Valentine?</h1>
+    <h1>Will you be my Valentine, Bubuchana?</h1>
 
     <div class="btnRow">
       <button id="yesBtn">Yes</button>
@@ -121,5 +122,31 @@
       page2.classList.remove("hidden");
     });
   </script>
+<style>
+.heart {
+  position: fixed;
+  bottom: -10px;
+  font-size: 20px;
+  animation: float 5s linear infinite;
+}
+@keyframes float {
+  to {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+</style>
+
+<script>
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}, 400);
+</script>
+
 </body>
 </html>
